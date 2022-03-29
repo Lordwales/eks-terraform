@@ -11,3 +11,16 @@ module "VPC" {
   private_subnets                     = [for i in range(1, 8, 2) : cidrsubnet(var.vpc_cidr, 8, i)]
   public_subnets                      = [for i in range(2, 5, 2) : cidrsubnet(var.vpc_cidr, 8, i)]
 }
+
+module "security" {
+  source = "./modules/Security"
+  vpc_id = module.VPC.vpc_id
+}
+
+module "EKS" {
+  source        = "./modules/EKS"
+  private-sbn-1 = module.VPC.private_subnets-1
+  private-sbn-2 = module.VPC.private_subnets-2
+  eks-sg        = module.security.aws_security_group.sg-eks-cluster
+
+}

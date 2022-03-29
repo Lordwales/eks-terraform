@@ -8,3 +8,7 @@ variable "private-sbn-2" {
 variable "eks-sg" {
   description = "Private subnets to deploy cluster"
 }
+
+variable "vpc_id" {
+  description = "VPC ID to deploy cluster"
+}

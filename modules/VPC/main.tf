@@ -29,7 +29,8 @@ resource "aws_subnet" "public" {
   tags = merge(
     var.tags,
     {
-      Name = format("%s-PublicSubnet-%s", var.name, count.index)
+      Name = format("%s-PublicSubnet-%s", var.name, count.index),
+      Tier = "public"
     },
   )
 
@@ -46,7 +47,8 @@ resource "aws_subnet" "private" {
   tags = merge(
     var.tags,
     {
-      Name = format("%s-PrivateSubnet-%s", var.name, count.index)
+      Name = format("%s-PrivateSubnet-%s", var.name, count.index),
+      Tier = "private"
     },
   )
 

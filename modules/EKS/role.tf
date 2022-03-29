@@ -24,6 +24,11 @@ resource "aws_iam_role_policy_attachment" "eks-cluster-AmazonEKSClusterPolicy" {
   role       = "${aws_iam_role.iam-role-eks-cluster.name}"
 }
 
+resource "aws_iam_role_policy_attachment" "eks-cluster-AmazonEKSServicePolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+  role       = "${aws_iam_role.iam-role-eks-cluster.name}"
+}
+
 # Creating IAM role for EKS nodes to work with other AWS Services. 
 
 

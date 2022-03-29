@@ -21,6 +21,8 @@ module "EKS" {
   source        = "./modules/EKS"
   private-sbn-1 = module.VPC.private_subnets-1
   private-sbn-2 = module.VPC.private_subnets-2
+  # private-subnets = module.VPC.private_subnets
   eks-sg        = module.security.sg-eks-cluster
+  vpc_id = module.VPC.vpc_id
 
 }

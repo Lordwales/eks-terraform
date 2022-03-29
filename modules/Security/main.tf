@@ -15,9 +15,9 @@ resource "aws_security_group" "eks-cluster" {
 # Ingress allows Inbound traffic to EKS cluster from the  Internet 
 
   ingress {                  # Inbound Rule
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

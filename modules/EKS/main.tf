@@ -1,3 +1,19 @@
+# Get list of availability zones
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+data aws_subnets "private" {
+  filter {
+    name   = "vpc-id"
+    values = [var.vpc_id]
+  }
+
+  tags = {
+    Tier = "Private"
+  }
+}
+
 # Creating the EKS cluster
 
 resource "aws_eks_cluster" "eks_cluster" {
@@ -14,8 +30,8 @@ resource "aws_eks_cluster" "eks_cluster" {
     }
 
   depends_on = [
-    "aws_iam_role_policy_attachment.eks-cluster-AmazonEKSClusterPolicy",
-    "aws_iam_role_policy_attachment.eks-cluster-AmazonEKSServicePolicy",
+    aws_iam_role_policy_attachment.eks-cluster-AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.eks-cluster-AmazonEKSServicePolicy,
    ]
 }
 
@@ -26,6 +42,7 @@ resource "aws_eks_node_group" "node" {
   node_group_name = "node_group"
   node_role_arn   = aws_iam_role.eks_nodes.arn
   subnet_ids      = [var.private-sbn-1, var.private-sbn-2]
+  instance_types    = ["t3a.large"]
 
   scaling_config {
     desired_size = 2

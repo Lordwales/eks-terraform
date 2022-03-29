@@ -41,10 +41,15 @@ terraform plan       #this will display all the resources that are planed to be 
 terraform apply      # this will run our terraform code and deploy those resources to AWS.
 ```
 
-## ADD CLUSTER TO CONFIG
+## ADD CLUSTER TO KUBECONFIG
 
 ```aws eks update-kubeconfig --region us-east-1 --name terraformEKScluster```
 
 ## VERIFY DEPLOYMENT
 
 Visit the Elastic Kubernetes Service section in your AWS Console to view the details of the newly created cluster.
+
+
+## IMPROVEMENT
+
+This project can be further improved dby using ```S3 as backend``` to store the state of the infrastructure especially in a Team scenerio. Also we can use ```Terraform Cloud``` to run the project. This gives more flexibilty, manages our secrets and build, can manage our workspaces too.

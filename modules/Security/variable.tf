@@ -8,3 +8,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "cluster-name" {
+  type        = string
+  description = "cluster name"
+  default = "terraformEKScluster"
+}
